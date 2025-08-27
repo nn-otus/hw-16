@@ -1,0 +1,6 @@
+---
+ansible_user                 :  nn 
+ansible_ssh_private_key_file :   /home/nn/.ssh/nn-otus
+owner                        :  NN
+location                     :  Russia
+project                      :  OTUS    

@@ -1,0 +1,60 @@
+---
+- name: NGINX | Install and configure NGINX Web Server
+  hosts: redhat_machines
+  become: True
+  vars:
+    nginx_listen_port: 8080
+
+  tasks:
+    - name: update cache
+      dnf: 
+        update_cache=yes
+      tags:
+        - update dnf
+
+    - name: NGINX | Install Nginx Web Server
+      dnf: 
+        name: nginx 
+        state: latest
+      notify:
+        - restart nginx  
+      tags:
+        - nginx-package
+
+    - name: NGINX | Create NGINX config file from template
+      template:
+        src: templates/nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+      notify:
+        - reload nginx
+      tags:
+        - nginx-configuration
+
+    - name: Разрешить порт 8080
+      ansible.builtin.firewalld:
+        port: 8080/tcp
+        zone: public
+        state: present
+        permanent: yes
+        immediate: yes
+        
+    - name: Разрешить службу HTTP
+      ansible.builtin.firewalld:
+        service: http
+        zone: public
+        state: present
+        permanent: yes
+        immediate: yes        
+
+  handlers:
+    - name: restart nginx
+      systemd:
+        name: nginx
+        state: restarted
+
+    - name: reload nginx
+      systemd:
+        name: nginx
+        state: reloaded
+
+

@@ -1,0 +1,13 @@
+---
+ansible_user                         : user
+ansible_password                     : P@$$w0Rd
+ansible_port                         : 5986
+ansible_connection                   : winrm
+ansible_winrm_server_cert_validation : ignore
+ansible_winrm_transpor 		     : credssp 
+ansible_winrm_scheme                 : https
+owner                                : nn
+location                             : Russia
+project                              : OTUS
+
+ 
