@@ -95,7 +95,7 @@ a96srv2                    : ok=6    changed=4    unreachable=0    failed=0    s
 [nn@a9-ansible ansible]$ curl 192.168.0.13:8080
 curl: (7) Failed to connect to 192.168.0.13 port 8080: Connection refused
 ```
-Сервис недоступен, хотя в выводе ansible-playbook результаты ОК
+Сервис недоступен, хотя в выводе ansible-playbook результаты ОК  
 3. Просто добавляем task для открытия порта 8080 в фаерволле и запускаем плэйбук повторно:
 
 
